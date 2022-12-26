@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int getSum(int a, int b) {
+        if(a==0)
+        return b;
+        if(b==0)
+        return a;
+        int ans=0;
+        if(a>0 && b>0){
+            ans=a;
+            for(int j=1;j<=b;j++){
+                ans++;
+            }
+            return ans;
+        }
+         if(a>0 && b<0){
+             ans=b;
+            for(int i=1;i<=a;i++){
+                ans++;
+            }
+            return ans;
+        }
+
+         if(a<0 && b>0){
+             ans=a;
+            for(int j=1;j<=b;j++){
+                ans++;
+            }
+            return ans;
+        }
+         if(a<0 && b<0){
+             a=a*(-1);
+             b=b*(-1);
+             ans=a;
+            for(int j=1;j<=b;j++){
+                ans++;
+            }
+            return (-1)*ans;
+        }
+
+   return ans; }
+};
