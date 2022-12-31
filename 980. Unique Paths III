@@ -1,0 +1,46 @@
+class Solution {
+public:
+int stx;
+int sty;
+int edx;
+int edy;
+int pathse;
+int m;
+int n;
+int ans=0;
+
+void dfs(vector<vector<int>> grid,int i,int j, int path){
+    if(i<0 || j<0 || i>=m || j>=n || grid[i][j]==-1)return ;
+    if(i==edx && j==edy && path==pathse){
+        ans++;
+        return ;
+    }
+    grid[i][j]=-1;
+    dfs(grid,i+1,j,path+1);
+    dfs(grid,i-1,j,path+1);
+    dfs(grid,i,j+1,path+1);
+    dfs(grid,i,j-1,path+1);
+}
+    int uniquePathsIII(vector<vector<int>>& grid) {
+        m=grid.size();
+        n=grid[0].size();
+        pathse=m*n;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(grid[i][j]==1){
+                    stx=i;
+                    sty=j;
+                }
+                else if(grid[i][j]==2){
+                    edx=i;
+                    edy=j;
+                }
+                else if(grid[i][j]==-1){
+                    pathse--;
+                }
+            }
+        }
+        dfs(grid,stx,sty,1);
+        return ans;
+    }
+};
