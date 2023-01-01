@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int countDigits(int num) {
+        int cnt=0;
+        string str=to_string(num);
+        for(auto i:str){
+            int val= i-'0';
+            if(num%val==0)
+            cnt++;
+        }
+        return cnt;
+    }
+};
