@@ -1,0 +1,11 @@
+class Solution {
+public:
+    int closetTarget(vector<string>& words, string target, int st) {
+    int n = words.size();
+    int ans = INT_MAX;
+        for(int i = 0; i < n; i++) 
+            if(words[i] == target) 
+                ans = min(ans,min(abs(st-i),abs(n-abs(st-i)))); 
+        return ans == INT_MAX ? -1 : ans;   
+    }
+};
