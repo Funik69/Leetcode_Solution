@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int minimumRounds(vector<int>& tasks) {
+        map<int,int> mp;
+        int cnt=0;
+        for(auto i:tasks)
+        mp[i]++;
+        for(auto i:mp){
+            if(i.second<2)return -1;
+            if(i.second==2 || i.second==3) cnt++;
+            if(i.second>3){
+                int a=(i.second/3);
+                if(a*3==i.second)
+                cnt+=a;
+                else
+                cnt+=a+1;
+            }
+        }
+    return cnt;}
+};
