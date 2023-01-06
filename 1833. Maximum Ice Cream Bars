@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int maxIceCream(vector<int>& costs, int coins) {
+        int cnt=0;
+        sort(costs.begin(),costs.end());
+        for(auto i:costs){
+            if(coins-i>=0){
+                cnt++;
+                coins-=i;
+            }
+            if(i>coins)break;
+        }
+        return cnt;
+    }
+};
