@@ -17,3 +17,19 @@ public:
         return score;
     }
 };
+
+//Using priority_queue
+class Solution {
+public:
+    long long maxKelements(vector<int>& nums, int k) {
+        long long int score=0;
+        priority_queue<int> pq(nums.begin(),nums.end());
+        while(k--){
+            int a=pq.top();
+            pq.pop();
+            score+=a;
+            pq.push(a%3==0?a/3:a/3+1);
+        }
+        return score;
+    }
+};
