@@ -1,0 +1,19 @@
+class Solution {
+public:
+    long long maxKelements(vector<int>& nums, int k) {
+        long long int score=0;
+        multiset<int> ms;
+        for(auto i:nums){
+            ms.insert(i);
+        }
+        while(k--){
+            auto it=ms.end();
+            it--;
+            int a=*it;
+            score+=a;
+            ms.erase(it);
+            ms.insert(a%3==0?a/3:a/3+1);
+        }
+        return score;
+    }
+};
