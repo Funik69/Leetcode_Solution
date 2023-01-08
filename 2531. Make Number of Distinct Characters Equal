@@ -1,0 +1,32 @@
+class Solution {
+public:
+    bool isItPossible(string word1, string word2) {
+        unordered_map<char,int> ump1,ump2;
+        set<char> st1,st2;
+        for(auto i:word1){
+            ump1[i]++;
+            st1.insert(i);}
+        for(auto i:word2){
+            ump2[i]++;
+            st2.insert(i);}
+        for(auto i:st1){
+            for(auto j:st2) {
+                ump1[i]--;
+                if(ump1[i]==0) ump1.erase(i);
+                ump1[j]++;
+                ump2[j]--;
+                if(ump2[j]==0) ump2.erase(j);
+                ump2[i]++;
+                if(ump1.size()==ump2.size()) return true;
+                if(ump1[j]==1) ump1.erase(j);
+                else ump1[j]--;
+                
+                if(ump2[i]==1) ump2.erase(i);
+                else ump2[i]--;
+                
+                ump1[i]++; ump2[j]++;
+            }
+        }
+        return false;
+    }
+};
