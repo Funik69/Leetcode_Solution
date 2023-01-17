@@ -1,0 +1,24 @@
+class Solution
+{
+public:
+void solve(Node* root,int &gcd,int &node){
+    if(root==NULL)return;
+    if(root->left && root->right && gcd< __gcd(root->left->data,root->right->data)){
+            node=root->data;
+            gcd=__gcd(root->left->data,root->right->data);
+        }
+    if(root->left && root->right && gcd==__gcd(root->left->data,root->right->data)){
+        node=max(node,root->data);
+    }
+        solve(root->left,gcd,node);
+        solve(root->right,gcd,node);
+}
+    int maxGCD( Node* root)
+    {
+         int gcd=0;
+         int node=0;
+         solve(root,gcd,node);
+         return node;
+    }
+
+};
