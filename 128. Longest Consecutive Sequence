@@ -1,0 +1,24 @@
+class Solution {
+public:
+   int longestConsecutive(vector<int>& nums) {
+    set<int> hashset;
+    for(auto i:nums) hashset.insert(i);
+    int longeststreak=0;
+    for(auto i:nums){
+        if(!hashset.count(i-1)){
+            int curr_streak=1;
+            int curr_num=i;
+        while(hashset.count(curr_num+1)){
+            curr_streak++;
+            curr_num+=1;}
+        
+        longeststreak=max(longeststreak,curr_streak);}
+    }
+    return longeststreak;
+}
+};
+
+
+
+
+
