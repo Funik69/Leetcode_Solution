@@ -1,0 +1,19 @@
+
+class Solution{
+    public:
+    int carpetBox(int A, int B, int C, int D){
+    int a=A,b=B,c=C,d=D;
+    int cnt1=0,cnt2=0;
+    while(a>c || b>d){
+        if(a>c)a/=2,cnt1++;
+        if(b>d)b/=2,cnt1++;
+    }
+    a=A,b=B,c=C,d=D;
+    while(a>d || b>c){
+        if(a>d)a/=2,cnt2++;
+        if(b>c)b/=2,cnt2++;
+    }
+    return min(cnt1,cnt2);
+    }
+    
+};
