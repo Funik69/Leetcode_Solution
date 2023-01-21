@@ -1,0 +1,16 @@
+class Solution {
+public:
+    bool isReachable(int targetX, int targetY) {
+        int a=targetX;
+        int b=targetY;
+        while(a!=b){
+            if(a>b){
+                a=a-b;
+            }
+            else
+                b=b-a;
+        }
+        int ans=log2(a);
+        return (pow(2,ans)==a);
+    }
+};
