@@ -1,0 +1,8 @@
+class Solution {
+public:
+    vector<vector<int>> sortTheStudents(vector<vector<int>>& score, int k) {
+        sort(score.begin(), score.end(), [k](const vector<int>& num1, const vector<int>& num) {
+            return num1[k] > num[k];  });
+        return score;
+    }
+};
