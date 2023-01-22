@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int alternateDigitSum(int n) {
+        string s=to_string(n);
+        reverse(s.begin(),s.end());
+        n=stoi(s);
+        int sum=0;
+        int val=1;
+        while(n>0){
+            sum+=(n%10)*val;
+            val=val*(-1);
+            n=n/10;
+        }
+        return sum;
+    }
+};
