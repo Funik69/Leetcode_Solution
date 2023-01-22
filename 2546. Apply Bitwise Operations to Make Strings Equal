@@ -1,0 +1,14 @@
+class Solution {
+public:
+    bool makeStringsEqual(string s, string target) {
+        int a=0,b=0;
+        if(s==target)return true;
+        for(auto i:s)
+            if(i=='1') 
+                a++;
+            for(auto i:target)
+                if(i=='1') 
+                    b++; 
+            if(a==0 || b==0) return false;
+        return true; }
+};
