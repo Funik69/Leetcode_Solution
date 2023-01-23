@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int findJudge(int n, vector<vector<int>>& trust) {
+        vector<int> acha(n+1,0);
+        vector<int> ji(n+1,0);
+        for(auto i:trust){
+            acha[i[0]]++;
+            ji[i[1]]++;
+        }
+        for(int i=1;i<=n;i++){
+            if(acha[i]==0 && ji[i]==n-1)return i;
+        }
+        return -1;
+    }
+};
