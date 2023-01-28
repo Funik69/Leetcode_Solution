@@ -1,0 +1,33 @@
+class Solution{
+    public:
+    unordered_map<string,bool> mp;
+    bool solve(string a,string b){
+        int n=a.length();
+        if(n!=b.length())return false;
+        if(a.compare(b)==0)return true;
+        if(n<2)return false;
+        bool flag=false;
+        string key=(a+" "+b);
+        if(mp.find(key)!=mp.end())return mp[key];
+        
+        for(int i=1;i<n;i++){
+            if(solve(a.substr(0,i),b.substr(n-i,i)) && solve(a.substr(i,n-i),b.substr(0,n-i))){
+                flag=true;
+                break;
+            }
+            else if(solve(a.substr(0,i),b.substr(0,i)) && solve(a.substr(i,n-i),b.substr(i,n-i))){
+                flag=true;
+                break;
+            }
+        }
+       return mp[key]=flag;
+    }
+    bool isScramble(string S1, string S2){
+        string a=S1;
+        string b=S2;
+    sort(a.begin(),a.end());
+    sort(b.begin(),b.end());
+    if(a!=b)return false;
+    return solve(S1,S2);
+    }    
+};
