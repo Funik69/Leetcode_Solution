@@ -1,0 +1,12 @@
+class Solution{
+	public:
+	int longestSubarray(int A,int B)
+	{
+	    if(A==B)return 1;
+	    int x=min(A,B),y=max(A,B);
+	    if(y%x==0)return ((y/x)-1);
+	    int cnt=y/x;
+	    if(x%(y%x)) cnt++;
+	return cnt;
+	}
+};
