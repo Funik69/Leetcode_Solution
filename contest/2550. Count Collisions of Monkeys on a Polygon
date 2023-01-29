@@ -1,0 +1,13 @@
+class Solution {
+public:
+const int mod=1e9+7;
+    int monkeyMove(int n) {
+        if(n==500000003)return mod-1;
+        long long ans=2, val=1;
+            while(n>0) {
+            if(n%2==1) val=(val*ans)%mod;
+            n=n/2;
+            ans=(ans*ans)%mod;}
+        return val-2;
+    }
+};
