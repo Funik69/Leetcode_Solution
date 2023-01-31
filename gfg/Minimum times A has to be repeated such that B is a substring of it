@@ -1,0 +1,27 @@
+class Solution {
+  public:
+  bool isSub(string str,string B){
+      int i=0;
+      while(i+B.size()<=str.size()){
+          if(str[i]==B[0]){
+              if(str.substr(i,B.size())==B) return true;
+              else i++;
+          }
+          else
+          i++;
+      }
+      return false;
+  }
+  
+    int minRepeats(string A, string B) {
+       string str="";
+       int cnt=0;
+       while(str.size()<B.size()){
+           str+=A;
+           cnt++;
+       }
+       if(isSub(str,B))return cnt;
+       if(isSub(str+A,B))return cnt+1;
+       return -1;
+    }
+};
