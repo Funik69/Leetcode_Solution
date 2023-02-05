@@ -1,0 +1,13 @@
+class Solution {
+public:
+    long long pickGifts(vector<int>& g, int k) {
+         priority_queue<int> qwe(g.begin(),g.end());
+        while(k--){ int a=qwe.top();
+            qwe.pop();
+            qwe.push((int)sqrt(a));}
+        long long amt=0;
+        while(!qwe.empty()){
+            amt+=qwe.top();
+            qwe.pop();}
+        return amt;}
+};
