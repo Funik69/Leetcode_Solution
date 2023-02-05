@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<int> vowelStrings(vector<string>& wd, vector<vector<int>>& queries) {
+        //code here
+        int n=wd.size();
+        vector<int> v(n);
+        vector<int> vv(n);
+        int i=0;
+        for(auto x:wd){
+            int l=x.size()-1;
+            //check kr rhe s and e
+          if((x[0]=='a' || x[0]=='e' || x[0]=='i' || x[0]=='o' || x[0]=='u' ) 
+             && (x[l]=='a' || x[l]=='e' || x[l]=='i' || x[l]=='o' || x[l]=='u') )v[i++]=1;
+            else v[i++]=0;}
+        vv[0]=v[0];
+        for(int i=1;i<n;i++)
+            vv[i]=vv[i-1]+v[i];
+        
+        int k=queries.size();
+        vector<int> res(k,0);
+        for(int i=0;i<k;i++){
+            int shru=queries[i][0];
+            int khtm=queries[i][1];
+            if(shru==0) res[i]=vv[khtm];
+            else res[i]=vv[khtm]-vv[shru-1];
+        } return res;
+    }
+};
