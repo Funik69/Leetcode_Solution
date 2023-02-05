@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int maxCount(vector<int>& banned, int n, int maxSum) {
+        map<int,int> mp;
+        int cnt=0;
+        for(auto i:banned){
+            mp[i]++;
+        }
+        int sum=0;
+        for(int i=1;i<=n;i++){
+           if(mp[i]==0){
+               sum+=i;
+               if(sum<=maxSum){
+                   cnt++;
+               }
+           }    
+        }
+        return cnt;
+    }
+};
