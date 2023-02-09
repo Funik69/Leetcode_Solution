@@ -1,0 +1,49 @@
+class Solution {
+public:
+    long long distinctNames(vector<string>& ideas) {
+        //TLE facing 
+        // map<string,int> mp;
+        // long long cnt=0;
+        // for(auto i:ideas) mp[i]++;
+        // for(int i=0;i<ideas.size()-1;i++){
+        //     for(int j=i+1;j<ideas.size();j++){
+        //         if(mp[ideas[i]]==1 && mp[ideas[j]]==1){
+        //             string p=ideas[i];
+        //             string q=ideas[j];
+        //             char s1=p[0];
+        //             char s2=q[0];
+        //             p[0]=s2;
+        //             q[0]=s1;
+        //             if(mp[p]==0 && mp[q]==0){
+        //                 cnt++;
+        //             }
+        //         }
+        //     }
+        // }
+        // return 2*cnt;
+        long long res = 0;
+        vector<vector<long long>> v(26,vector<long long>(26,0));
+        unordered_map<int,unordered_set<string>> mp;
+        for(auto &idea : ideas){
+            mp[idea[0]-'a'].insert(idea);
+        }
+        for(int i=0;i<26;i++){
+            for(int j=0;j<26;j++){
+                if(mp.find(i) == mp.end() || i == j) continue;
+                for(auto &e : mp[i]){
+                    string p = e;
+                    p[0] = 'a'+j;
+                    if(mp[j].count(p)) continue;
+                    v[i][j]++;
+                }
+            }
+        }
+        for(int i=0;i<26;i++){
+            for(int j=0;j<26;j++){
+                if(i!=j)
+                res += (v[i][j]*v[j][i]);
+            }
+        }
+        return res;
+    }
+};
