@@ -1,0 +1,38 @@
+class Solution{
+public:
+    Node *primeList(Node *head){
+        vector<int> prime(19900,1);
+        prime[0]=0;
+        prime[1]=0;
+        for(int i=2;i<=19900;i++){
+            if(prime[i]==1){
+                for(int j=i*i;j<=19900;j+=i){
+                prime[j]=0;}
+            }
+        }
+        Node* curr=head;
+        while(curr!=NULL){
+            if(prime[curr->val]){
+                curr=curr->next;
+            }
+            else{
+                int vl=curr->val;
+                int vh=curr->val;
+                while(true){
+                    if(prime[vl--]){
+                        curr->val=vl+1;
+                        curr=curr->next;
+                        break;
+                    }
+                    else if(prime[vh++]){
+                        curr->val=vh-1;
+                        curr=curr->next;
+                        break;
+                    }
+                }
+            }
+        }
+        return head;
+        
+    }
+};
