@@ -1,0 +1,44 @@
+class Solution {
+    void bfs(int row,int col,vector<vector<char>> &grid,vector<vector<int>> &vis){
+        vis[row][col]=1;
+        queue<pair<int,int>> q;
+        int n=grid.size();
+        int m=grid[0].size();
+        q.push({row,col});
+        while(!q.empty()){
+            int nrow=q.front().first;
+            int ncol=q.front().second;
+            q.pop();
+            for(int i=-1;i<=1;i++){
+                for(int j=-1;j<=1;j++){
+                    int rnw=nrow+i;
+                    int cnw=ncol+j;
+                    if(rnw>=0 && rnw<n && cnw>=0 && cnw<m && grid[rnw][cnw]=='1' 
+                    && !vis[rnw][cnw]){
+                        vis[rnw][cnw]=1;
+                        q.push({rnw,cnw});
+                    }
+                    
+                }
+            }
+        }
+    }
+  public:
+    // Function to find the number of islands.
+    int numIslands(vector<vector<char>>& grid) {
+        int m=grid.size();
+        int n=grid[0].size();
+        vector<vector<int>> vis(m,vector<int>(n,0));
+        int cnt=0;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+             if(grid[i][j]=='1' && !vis[i][j]){
+                 vis[i][j]=1;
+                 cnt++;
+                 bfs(i,j,grid,vis);
+             }
+            }
+            
+        }return cnt;
+    }
+};
