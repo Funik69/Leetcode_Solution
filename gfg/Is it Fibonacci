@@ -1,0 +1,16 @@
+class Solution {
+  public:
+    long long solve(int N, int K, vector<long long> GeekNum) {
+        if(GeekNum.size()==1) return GeekNum[0];
+        if(N<=GeekNum.size()) return GeekNum[N-1];
+        int idx=0;
+        long long cur=0;
+        long long sum=accumulate(GeekNum.begin(),GeekNum.end(),0);
+        while(GeekNum.size()!=N){
+             cur=GeekNum[idx++];
+             GeekNum.push_back(sum);
+             sum=sum*2-cur;
+        }
+        return GeekNum[N-1];
+    }
+};
