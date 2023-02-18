@@ -1,0 +1,11 @@
+class Solution {
+public:
+    int minImpossibleOR(vector<int>& n) {
+        map<int, int> mpp;
+        for (auto& i: n) mpp[i]++;
+        for (int i = 0; i < 31; i++) {
+            if (!mpp[1 << i])
+                return 1 << i; }
+        return -1;
+    }
+};
