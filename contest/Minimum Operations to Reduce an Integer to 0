@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int minOperations(int n) {
+    int count=0;
+    while(n>0){
+        if(n==1){
+            count++;
+            return count;
+        }
+        int y=pow(2,(int)log2(n));
+        int z=pow(2,(int)log2(n)+1);
+        if(abs(y-n)<abs(z-n)){
+            n=abs(y-n);
+            count++;
+        }
+        else{
+            n=abs(z-n);
+            count++;
+        }
+    }
+    return count;
+    }
+};
