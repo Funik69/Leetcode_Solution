@@ -1,0 +1,26 @@
+class Solution {
+  public:
+  int sol(vector<vector<int>> &v,int cur){
+      int cnt=0;
+      for(auto i:v){
+          int a=i[0],b=i[1],c=i[2];
+          if(a==cur)
+              cur=b;
+          else if(b==cur)
+              cur=a;
+          if(cur==c)
+              cnt++;
+      }
+      return cnt;
+  }
+  public:
+vector<int> juggling(vector<vector<int>> &arr,int n) {
+       int mx=0,val;
+       for(int i=1;i<=3;i++){
+           if(sol(arr,i)>mx){
+               mx=sol(arr,i),val=i;
+           }
+       }
+       return {val,mx};
+    }
+};
