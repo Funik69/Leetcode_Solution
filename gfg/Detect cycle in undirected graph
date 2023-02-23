@@ -1,3 +1,5 @@
+//Using BFS
+
 class Solution {
   public:
     // Function to detect cycle in an undirected graph.
@@ -30,5 +32,31 @@ class Solution {
            }
        }
        return false;
+    }
+};
+
+//using DFS
+
+class Solution {
+  public:
+    // Function to detect cycle in an undirected graph.
+    bool dfs(int node,int par,vector<int> adj[],int vis[]){
+        vis[node]=1;
+        for(auto ad:adj[node]){
+            if(!vis[ad]){
+                if(dfs(ad,node,adj,vis))return true;
+            }
+            else if(par!=ad) return true;
+        }
+        return false;
+    }
+    bool isCycle(int V, vector<int> adj[]) {
+        int vis[V]={0};
+        for(int i=0;i<V;i++){
+            if(!vis[i]){
+                if(dfs(i,-1,adj,vis)) return true;
+            }
+        }
+        return false;
     }
 };
