@@ -1,0 +1,22 @@
+void succr(Node* root,Node*& suc,int k){
+    if(!root)return ;
+    succr(root->right,suc,k);
+    if(root->key>k)
+      suc=root;
+     succr(root->left,suc,k); 
+    
+}
+void pred(Node* root,Node*& pre,int k){
+    if(!root)return ;
+    pred(root->left,pre,k);
+    if(root->key<k)
+    pre=root;
+    pred(root->right,pre,k);
+    
+}
+
+void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
+{
+    succr(root,suc,key);
+    pred(root,pre,key);
+}
