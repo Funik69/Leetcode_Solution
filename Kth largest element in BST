@@ -1,0 +1,21 @@
+class Solution
+{
+    public:
+    void sol(Node* root,vector<int>&res){
+        if(root==NULL)return ;
+        sol(root->left,res);
+        res.push_back(root->data);
+        sol(root->right,res);
+    }
+    int kthLargest(Node *root, int K)
+    {
+        vector<int> v;
+        int cnt=0;
+        sol(root,v);
+        for(int i=v.size()-1;i>=0;i--){
+            cnt++;
+            if(cnt==K)return v[i];
+        }
+        return 0;
+    }
+};
