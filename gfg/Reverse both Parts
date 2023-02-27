@@ -1,0 +1,24 @@
+class Solution
+{
+public:
+   
+    Node *reverse(Node *head, int k){
+        vector<int> v;
+        Node* temp=head;
+        while(temp!=NULL){
+            v.push_back(temp->data);
+            temp=temp->next;
+        }
+        Node* a=new Node(-1);
+        Node* b=a;
+        for(int i=k-1;i>=0;i--){
+            b->next=new Node(v[i]);
+            b=b->next;
+        }
+        for(int i=v.size()-1;i>=k;i--){
+            b->next=new Node(v[i]);
+            b=b->next;
+        }
+        return a->next;
+    }
+};
