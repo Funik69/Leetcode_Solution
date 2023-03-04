@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int splitNum(int num) {
+        string str=to_string(num);
+        sort(str.begin(),str.end());
+        string a="",b="";
+        for(int i=0;i<str.size();i++){
+            if(i%2==0)
+                a+=str[i];
+            else b+=str[i];
+        }
+        return stoi(a)+stoi(b);
+    }
+};
