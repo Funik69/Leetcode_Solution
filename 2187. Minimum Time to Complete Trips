@@ -1,0 +1,23 @@
+class Solution {
+public:
+bool check(vector<int>& time ,long long  givenTime,long long  totaltrips){
+    long long  calTrip=0;
+    for(auto i:time){
+        calTrip+=givenTime/i;
+    }
+    return (calTrip>=totaltrips);
+}
+    long long minimumTime(vector<int>& time, int totalTrips) {
+        long long left=0;
+        long long right= 1LL* *max_element(time.begin(),time.end())*totalTrips;
+        while(left<right){
+        long long mid=(left+right)/2;
+        if(check(time,mid,totalTrips)){
+            right=mid;
+        }
+        else
+        left=mid+1;
+        }
+        return left;
+    }
+};
