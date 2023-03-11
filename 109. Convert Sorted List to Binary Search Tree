@@ -19,37 +19,32 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-
 class Solution {
 public:
-    ListNode *checkMiddle(ListNode *head){
-        ListNode *slow = head, *fast = head;
-        while (fast and fast->next)
-            slow = slow->next, fast = fast->next->next;
-        return slow;
-    }
-    TreeNode *checkBuild(ListNode *head){
-        if (!head) return NULL;
-        if (checkMiddle(head) == head) return new TreeNode(head->val);
-        ListNode *middle = checkMiddle(head);
-
-        TreeNode *root = new TreeNode(middle->val);
-        ListNode *ptr = head;
-        while (ptr->next != middle)
-            ptr = ptr->next;
-
-        ListNode *first = head;
-        ListNode *second = middle->next;
-
-        ptr->next = NULL;
-        middle->next = NULL;
-        root->left = checkBuild(first);
-        root->right = checkBuild(second);
+    TreeNode* sortedListToBST(ListNode* head) {
+        //NULL to direct return kro
+        if(head==NULL) return NULL;
+        //ek element hua to whi root hoga 
+        if(head->next==NULL) {
+            auto root= new TreeNode(head->val);
+            return root;
+        }
+        //rest k liye middle of LL find kro or 
+        ListNode* slow=head;
+        ListNode* fast=head;
+        ListNode* prev=head;
+        while(fast!=NULL && fast->next!=NULL){
+            prev=slow;
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        //middle to root bnao
+        TreeNode* root=new TreeNode(slow->val);
+        //chain break kro root k left s alg hogi or right s alg
+        prev->next=NULL;
+        // recursively solve kro ab 
+        root->left=sortedListToBST(head);
+        root->right=sortedListToBST(slow->next);
         return root;
-    }
-
-    TreeNode *sortedListToBST(ListNode *head){
-        if (!head) return NULL;
-        return checkBuild(head);
     }
 };
