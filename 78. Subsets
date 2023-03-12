@@ -1,0 +1,20 @@
+class Solution {
+public:
+void solve(int idx,vector<int>& nums,vector<vector<int>> &vv,vector<int>&temp,int N){
+    if(idx == N){
+        vv.push_back(temp);
+        return ;
+    }
+    temp.push_back(nums[idx]);
+    solve(idx+1,nums,vv,temp,N);
+    temp.pop_back();
+    solve(idx+1,nums,vv,temp,N);
+}
+    vector<vector<int>> subsets(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> vv;
+        vector<int> temp;
+        solve(0,nums,vv,temp,nums.size());
+        return vv;
+    }
+};
