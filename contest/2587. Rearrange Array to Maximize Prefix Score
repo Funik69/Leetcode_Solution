@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int maxScore(vector<int>& nums) {
+        sort(nums.begin(),nums.end(),greater<int>());
+        long long val=0,tot=0;
+        for(auto i:nums){
+            val+=i;
+            if(val>0) tot++;
+            else break;
+        }
+        return tot;
+    }
+};
