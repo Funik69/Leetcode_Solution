@@ -1,0 +1,32 @@
+class Solution {
+  public:
+    int minimumOperations(int n, vector<int> &a) {
+       int cnt=0;
+       int cnt1=0;
+       int cnt2=0;
+        for(auto i:a)
+           {if(i%3==1) cnt1++;
+           if(i%3==2) cnt2++;}
+        if(cnt1==cnt2) return cnt1;
+        else if(cnt1>cnt2){
+            // 1 1 1 1 1 2 2
+            cnt=cnt2;
+            cnt1=cnt1-cnt2;
+            if(cnt1%3==0){
+                 return cnt+(cnt1/3)*2;
+            }
+            return -1;
+        }
+        else{
+            swap(cnt1,cnt2);
+           cnt=cnt2;
+            cnt1=cnt1-cnt2;
+            if(cnt1%3==0){
+                 return cnt+(cnt1/3)*2;
+            }
+            return -1;
+        }
+        return -1;
+        
+        }
+};
