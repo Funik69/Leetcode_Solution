@@ -1,0 +1,49 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    bool isCompleteTree(TreeNode* root) {
+        //declare a queue(q) and bool check (chk)
+        queue<TreeNode*> q;
+        bool chk=false;
+
+        //insert root to queue
+        q.push(root);
+
+        //iterate over all root value 
+        while(!q.empty()){
+
+            //taking current root as node
+            auto node=q.front();
+
+            //remove that node from queue
+            q.pop();
+
+            //check for left of node exist or not
+            if(node->left){
+                //node right is null and after that any node exist in same level then retunrn false
+                if(chk) return false;
+                q.push(node->left);
+            }
+            else chk=true; //if node left is not then turn to true
+
+            //check for right of node exist or not
+            if(node->right){
+                // if node left is null and there exist right at same levelthen return false
+                if(chk) return false;
+                q.push(node->right);
+            }
+            else chk=true; //if node right is not their then turn chk to true
+        }
+        return true;
+    }
+};
