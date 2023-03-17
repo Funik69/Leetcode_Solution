@@ -1,0 +1,24 @@
+class Solution
+{
+    public:
+    void inorder(Node* root,vector<int> &res){
+        if(root==NULL) return ;
+        inorder(root->left,res);
+        res.push_back(root->data);
+        inorder(root->right,res);
+    }
+    bool isBST(Node* root) 
+    {
+       vector<int> res;
+       vector<int> v;
+       inorder(root,res);
+       v=res;
+       sort(v.begin(),v.end());
+      for(int i=0;i<v.size()-1;i++){
+          if(v[i]==v[i+1]) return 0;
+      }
+       return (v==res);
+      
+       
+    }
+};
