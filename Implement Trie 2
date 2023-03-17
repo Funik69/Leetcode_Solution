@@ -1,0 +1,30 @@
+#include <bits/stdc++.h> 
+class Trie{
+
+    public:
+map<int,int> mp;
+    Trie(){
+        // Write your code here.
+    }
+
+    void insert(string &word){
+        mp[word]++;
+    }
+
+    int countWordsEqualTo(string &word){
+       return mp[word];
+    }
+
+    int countWordsStartingWith(string &word){
+        int cnt=0;
+        for(auto i:mp){
+            string str=i.first;
+            if(str.substring(0,word.size())==word){cnt+=i.second;}
+        }
+        return cnt;
+    }
+
+    void erase(string &word){
+       mp[word]--;
+    }
+};
