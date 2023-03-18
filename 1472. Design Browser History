@@ -1,0 +1,42 @@
+class BrowserHistory {
+vector<string> v;
+int idx=-1;
+int mxSize=0;
+public:
+    BrowserHistory(string homepage) {
+        v.push_back(homepage);
+        idx=0,mxSize=1; }
+    
+    void visit(string url) {
+       if(v.size()-1>idx){
+           v[idx+1]=url;
+           idx++;
+           mxSize=idx+1;
+       }
+       else{
+           v.push_back(url);
+           idx++;
+           mxSize++;
+       }
+    }
+    
+    string back(int steps) {
+        int ans=min(steps,idx);
+        idx-=ans;
+        return v[idx];
+    }
+    
+    string forward(int steps) {
+       int ans=min(steps,mxSize-idx-1);
+       idx+=ans;
+       return v[idx];
+    }
+};
+
+/**
+ * Your BrowserHistory object will be instantiated and called as such:
+ * BrowserHistory* obj = new BrowserHistory(homepage);
+ * obj->visit(url);
+ * string param_2 = obj->back(steps);
+ * string param_3 = obj->forward(steps);
+ */
