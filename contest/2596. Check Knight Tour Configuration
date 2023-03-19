@@ -1,0 +1,29 @@
+class Solution {
+public:
+    bool isPossibleOrNot(int row, int colm, int n, vector<vector<bool>>& myVis) {
+    return row >= 0 && row < n && colm >= 0 && colm < n && !myVis[row][colm];
+}
+    bool checkValidGrid(vector<vector<int>>& grid) {
+    int n=grid.size();
+    vector<vector<bool>> myVis(n, vector<bool>(n, false));
+    int r = 0, c = 0;
+    myVis[r][c] = true;
+    for(int i = 0; i < n * n - 1; i++) {
+        int Nrr = r, Nrc = c;
+        bool found = false;
+        for(int k = 0; k < 8; k++) {
+            int dirR[8] = {1, 2, 2, 1, -1, -2, -2, -1};
+            int dirC[8] = {2, 1, -1, -2, -2, -1, 1, 2};
+            Nrr = r + dirR[k], Nrc = c + dirC[k];
+            if(isPossibleOrNot(Nrr, Nrc, n, myVis) && grid[Nrr][Nrc] == i + 1) {
+                found = true;
+                break;
+            }
+        }
+        if(!found) return false;
+        myVis[Nrr][Nrc] = true;
+        r = Nrr, c = Nrc;
+    }
+    return true;
+    }
+};
