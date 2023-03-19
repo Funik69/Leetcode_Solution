@@ -1,0 +1,18 @@
+class Solution {
+public:
+    vector<int> evenOddBit(int n) {
+        string str = "";
+        int evenCnt=0,oddCnt=0;
+        while(n) {
+        str += to_string(n % 2);
+        n /= 2;}
+    reverse(str.begin(), str.end());
+        int myCnt=0;
+        for(int i=str.size()-1;i>=0;i--){
+            if(myCnt%2==0 && str[i]=='1') evenCnt++;
+            if(myCnt%2==1 && str[i]=='1') oddCnt++;
+            myCnt++;
+        }
+        return {evenCnt,oddCnt};
+    }
+};
