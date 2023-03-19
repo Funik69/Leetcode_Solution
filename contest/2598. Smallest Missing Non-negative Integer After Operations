@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int findSmallestInteger(vector<int>& v, int vl) {
+    map<int,int> myMap;
+        for(int i=0;i<vl;i++)
+            myMap[i]=0;
+        int n=v.size();
+        for(int i=0;i<n;i++){
+            int t1=v[i],t2=vl;
+            myMap[ (t1%t2 + t2)%t2]++;}
+        int mn=INT_MAX;
+        for(auto itrr: myMap){
+            if(itrr.second < mn)
+                mn=itrr.second; }
+        for(auto itrr:myMap){
+            if(itrr.second==mn)
+                return vl*mn + itrr.first; }
+        return 0;
+    }
+};
