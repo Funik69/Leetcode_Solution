@@ -1,0 +1,17 @@
+class Solution{
+  public:
+    int MissingNumber(vector<int>& array, int n) {
+        int i=1,j=0;
+        sort(array.begin(),array.end());
+        while(i<=n && j<array.size()){
+            if(array[j]==i){
+                i++;
+                j++;
+            }
+            else{
+                return i;
+            }
+        }
+        return i;
+    }
+};
