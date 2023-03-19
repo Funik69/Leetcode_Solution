@@ -1,0 +1,35 @@
+class WordDictionary {
+public:
+    WordDictionary() { } 
+    void addWord(string word) {
+        if (m_words.find(word.length()) == m_words.end()) {
+            m_words[word.length()] = vector<string>(); }
+        
+        m_words[word.length()].push_back(word);
+    }
+    bool search(string word) {
+        if (m_words.find(word.length()) == m_words.end())
+            return false;
+        for (auto& stored_word : m_words[word.length()]) {
+            
+            bool word_is_matched = true;
+            
+            for (int i = 0; i < word.length(); ++i) {
+                if (word[i] == '.')
+                    continue;
+                
+                if (stored_word[i] != word[i]) {
+                    word_is_matched = false;
+                    break;
+                }
+            }
+            if (word_is_matched)
+                return true;
+        }
+        
+        return false;
+    }
+    
+private:
+    unordered_map<size_t, vector<string>> m_words;
+};
