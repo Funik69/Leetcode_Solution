@@ -1,0 +1,33 @@
+class Solution{
+public:
+int s1=0,s2=INT_MAX;
+Node* node=NULL;
+void rootTotar(Node* root,int target,int sum){
+    if(root==NULL) return ; 
+    if(root->data==target){
+        s1=sum;
+        node=root;
+    }
+    if(root->data > target){
+        rootTotar(root->left,target,sum+root->data);
+    }
+    else rootTotar(root->right,target,sum+root->data);
+}
+void tarToleaf(Node* root,int sum){
+    if(root==NULL) return;
+    sum+=root->data;
+    if(root->left==NULL && root->right==NULL){
+        s2=min(s2,sum);
+        return;
+    }
+    tarToleaf(root->left,sum);
+    tarToleaf(root->right,sum);
+    
+}
+    int maxDifferenceBST(Node *root,int target){
+        rootTotar(root,target,0);
+        if(node==NULL) return -1;
+        tarToleaf(node,0);
+        return s1-s2+target;
+    }
+};
