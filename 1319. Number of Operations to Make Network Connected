@@ -1,0 +1,35 @@
+class Solution {
+public:
+ void dfs(int node,vector<int> adj[],vector<int> &vis){
+     //Just normal dfs
+        vis[node]=1;
+        for(auto i:adj[node]){
+            if(!vis[i])
+            dfs(i,adj,vis);
+        }
+    }
+    int makeConnected(int n, vector<vector<int>>& con) {
+        //wire km hue to possible nhi h .. return -1;
+        if(con.size()<n-1) return -1;
+        //adj list bnao or store kro 
+        vector<int> adj[n+1];
+        for(auto i:con){
+            adj[i[0]].push_back(i[1]);
+            adj[i[1]].push_back(i[0]);
+        }
+        //vis array bnao
+        vector<int> vis(n,0);
+        //track count on num of components
+        int cnt=0;
+        for(int i=0;i<n;i++){
+            if(!vis[i]){
+                //call dfs at one call he mrked all the connected components
+                dfs(i,adj,vis);
+                //component++;
+                cnt++;
+            }
+        }
+        //return Total component -1;
+        return cnt-1;
+    }
+};
