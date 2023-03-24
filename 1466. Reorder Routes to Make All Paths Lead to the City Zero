@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int minReorder(int n, vector<vector<int>>& con) {
+        vector<vector<pair<int,int>>> adj(n);
+        int ans=0;
+        for(auto i:con){
+            adj[i[0]].push_back({i[1],1}); //possible path 
+            adj[i[1]].push_back({i[0],0}); //not possible path
+        }    
+        vector<int> vis(n,0);
+        vis[0]=1;
+        queue<int> q;
+        q.push(0);
+        while(!q.empty()){
+            int node=q.front();
+            q.pop();
+            for(auto i:adj[node]){
+                if(!vis[i.first]){
+                    if(i.second==1) ans++;
+
+                    vis[i.first]=1;
+                    q.push(i.first);
+                }
+            }
+        }
+        return ans;
+   }
+};
