@@ -1,0 +1,36 @@
+class Solution {
+public:
+    vector<vector<int>> getAncestors(int n, vector<vector<int>>& edges) {
+        vector<int> adj[n];   
+        vector<int> indegree(n);
+        for(auto i:edges){
+            adj[i[0]].push_back(i[1]);
+            indegree[i[1]]++;
+        }
+        queue<int> q;
+        for(int i=0;i<n;++i){
+            if(indegree[i]==0)
+                q.push(i);
+        }
+        set<int> st[n];
+        while(!q.empty()){
+            int cur=q.front(); 
+            q.pop();
+            for(auto i:adj[cur]){
+                st[i].insert(cur); 
+                for(auto it:st[cur])
+                    st[i].insert(it);
+          
+                indegree[i]--;
+                if(indegree[i]==0)
+                q.push(i);
+            }
+        }
+        
+        vector<vector<int>> ans(n);
+        for(int i=0;i<n;++i)
+            ans[i]=vector<int>(st[i].begin(),st[i].end());
+        
+        return ans; 
+    }
+};
