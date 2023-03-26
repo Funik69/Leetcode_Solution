@@ -1,0 +1,46 @@
+class Solution {
+public:
+    stack<int> st;
+    vector<bool> vis;
+    int cnt = 0;
+    void dfs( int node, vector<int> adj[]){
+        cnt++;
+        vis[node] = true;
+        for(int i:adj[node]){
+            if(vis[i]==false){
+                dfs( i, adj );
+            }
+        }
+        st.push(node); 
+    }
+    
+    int longestCycle(vector<int>& edges) { 
+        int n=edges.size();   
+        vis.resize(n,false);
+        vector<int> adj[n],adjT[n];
+        for(int i=0;i<n;i++){
+            if(edges[i]!=-1){
+                adj[i].push_back(edges[i]);
+                adjT[edges[i]].push_back(i);
+            }
+        }
+        for(int i=0;i<n;i++){
+            if(!vis[i]){
+                dfs(i,adj);
+            }
+        }
+        vis.clear();
+        vis.resize(n,false); 
+		
+        int ans = 0;
+        while(st.size()){
+            int node = st.top();
+             st.pop();
+            if(vis[node]) continue; 
+            cnt = 0;
+            dfs(node,adjT);
+            ans = max(ans,cnt);
+        }
+        return (ans==1?-1:ans);
+    }
+};
