@@ -1,0 +1,23 @@
+class Solution{
+  public:
+  bool isvowel(char ch){
+      return (ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u');
+  }
+    string valuableString(int n, vector<string> &arr) {
+        int diff=INT_MIN;
+        string str="";
+        for(auto i:arr){
+            string x=i;
+            int a=0,b=0;
+            for(auto j:x){
+                if(isvowel(j)) a++;
+                else b++;
+            }
+            if(diff<abs(a-b)){
+                diff=abs(a-b);
+                str=x;
+            }
+        }
+        return str;
+    }
+};
