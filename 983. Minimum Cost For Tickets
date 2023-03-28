@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int mincostTickets(vector<int>& days, vector<int>& costs) {
+        vector<int> minCost(367);
+        vector<bool> Days(366, false);
+        for(int d : days) Days[d] = true;
+        for(int i = 365; i >= 1; i--){
+            if(!Days[i]){
+                minCost[i] = minCost[i + 1];
+                continue;
+            }
+            
+            minCost[i] = min({costs[0] + minCost[i + 1],costs[1] + minCost[min(i + 7, 366)],costs[2] + minCost[min(i + 30, 366)]});
+        }
+        return minCost[1];
+    }
+};
