@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int maxSatisfaction(vector<int>& sat) {
+        sort(sat.begin(),sat.end());
+        int a=0;
+        for(auto i:sat){
+            if(i<0) a++;
+        }
+        long long sum,ans=0;
+        if(a==0){
+            for(int i=0;i<sat.size();i++){
+                sum+=(i+1)*sat[i];
+            }
+            return sum;
+        }
+        int idx=a-1;
+        
+        while(a--){
+            int j=1;
+            sum=0;
+            for(int i=idx;i<sat.size();i++){
+                sum+=j*sat[i];
+                j++;
+            }
+            idx--;
+            ans=max(ans,sum);
+        }
+        return ans;
+    }
+};
