@@ -1,0 +1,15 @@
+class Solution {
+  public:
+    int minimumInteger(int N, vector<int> &A) {
+        long long sum=0;
+        long long ans=INT_MAX;
+        for(auto i:A) sum+=i;
+        for(long long i:A){
+            if((long long)i*N>=sum){
+                ans=min(ans,(long long)i);
+            }
+        }
+        if(ans*N)
+        return ans;
+    }
+};
