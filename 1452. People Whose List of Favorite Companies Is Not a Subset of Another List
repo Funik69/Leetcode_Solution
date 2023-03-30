@@ -1,0 +1,16 @@
+class Solution {
+public:
+    vector<int> peopleIndexes(vector<vector<string>>& favs) {
+        for(auto &i:favs) sort(i.begin(),i.end());
+        vector<int> res;
+        for(int i=0;i<favs.size();i++){
+            bool chk=true;
+            for(int j=0;j<favs.size() && chk;j++){
+                if(i==j) continue;
+                chk=!includes(favs[j].begin(),favs[j].end(),favs[i].begin(),favs[i].end());
+            }
+            if(chk) res.push_back(i);
+        }
+	return res;
+  }
+};
