@@ -1,0 +1,14 @@
+class Solution
+{
+    public:
+        vector <int> lexicographicallyLargest(vector <int> &a,int n)
+        {
+            int prev=0, next=0;
+            while(next<n){
+                while(next<n && a[prev]%2 == a[next]%2) next++;
+                sort(a.begin()+prev, a.begin()+next, greater<int>());
+                prev=next;
+            }
+            return a;
+        }
+};
