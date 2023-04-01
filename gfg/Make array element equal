@@ -1,0 +1,7 @@
+class Solution {
+  public:
+    long long int minOperations(int N) {
+        long long n=(N/2)*1LL;
+        return N%2==0?(n*n):n*(n+1);
+    }
+};
