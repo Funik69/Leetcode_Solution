@@ -1,0 +1,17 @@
+class Solution {
+public:
+    vector<int> successfulPairs(vector<int>& spells, vector<int>& pot, long long success) {
+        int n=pot.size();
+        vector<int> ans;
+        sort(pot.begin(),pot.end());
+        for(auto i:spells){
+            long long k;
+            if(success%i==0){ k=(success/i);}
+            else k=(success/i) +1LL;
+            int idx=lower_bound(pot.begin(),pot.end(),k) - pot.begin();
+            int res=n-idx;
+            ans.push_back(res);
+        }
+        return ans;
+    }
+};
