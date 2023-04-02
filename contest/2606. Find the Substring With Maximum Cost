@@ -1,0 +1,32 @@
+class Solution{
+public:
+int solve(vector<int>&v, int size){
+    int mxnum = INT_MIN, mxEnd = 0;
+    for (int i = 0; i < size; i++) {
+        mxEnd = mxEnd + v[i];
+        if (mxnum < mxEnd) mxnum = mxEnd;
+        if (mxEnd < 0)  mxEnd = 0;
+    }
+    return mxnum;
+}
+    int maximumCostSubstring(string str, string chr, vector<int>& vl) {
+        map<char,int>mp;
+        char c = 'a';
+        mp[c] = 1;
+        for(int  i =1;i<26;i++){
+            c++;
+            mp[c] = i+1;
+        }
+        int nu1 = chr.size();
+        for(int i =0;i<nu1;i++) mp[chr[i]] = vl[i];
+        
+        vector<int>myvec;
+        for(int i =0;i<str.length();i++){
+            myvec.push_back(mp[str[i]]);
+        }
+        int ans = solve(myvec,myvec.size());
+        if(ans<0) return 0;
+            return ans;
+        
+    }
+    };
