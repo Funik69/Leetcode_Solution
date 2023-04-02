@@ -1,0 +1,22 @@
+class Solution { 
+public: 
+    int findTheLongestBalancedSubstring(string s) { 
+       int size=s.size(); 
+       int myRes=0; 
+        for(int i=0;i<size;i++){ 
+            int j=i; 
+            int tmp1=0,mytmp2=0; 
+            for(;j<size;j++){ 
+                if(s[j]=='0') 
+                     tmp1++; 
+                if(s[j]=='1') 
+                    break;  } 
+            int x=j; 
+            for(;x<size;x++){ 
+                if(s[x]=='1') mytmp2++; 
+                if(s[x]=='0') break; 
+                if(tmp1==mytmp2) myRes=max(myRes,(x-i+1)); 
+            } 
+        } return myRes;  
+    } 
+};
