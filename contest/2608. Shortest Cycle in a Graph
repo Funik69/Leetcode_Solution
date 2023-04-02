@@ -1,0 +1,36 @@
+
+class Solution {
+public:
+    int findShortestCycle(int n, vector<vector<int>>& edges) {
+        vector<vector<int>> myAdjList(n);
+        for(auto e: edges){
+            myAdjList[e[0]].push_back(e[1]);
+            myAdjList[e[1]].push_back(e[0]);
+        }
+        int myResult=INT_MAX;
+        for(int i=0;i<n;i++){
+            vector<int> visi(n,1e9);
+            vector<int> parentVec(n,-1);
+            visi[i]=0;
+            queue<int> myQue;
+            myQue.push(i);
+            while(!myQue.empty()){
+                int x=myQue.front();
+                myQue.pop();
+                
+                for(auto myItr: myAdjList[x]){
+                    if(visi[myItr] == (int)1e9){
+                        visi[myItr]= 1+ visi[x];
+                        parentVec[myItr] = x;
+                        myQue.push(myItr);
+                    }
+                    else if(parentVec[x]!=myItr && parentVec[myItr]!=x)
+                        myResult=min(myResult,visi[x]+visi[myItr]+1);
+                }
+                
+            }
+        }
+        if(myResult==INT_MAX) return -1;
+            return myResult;
+    }
+};
