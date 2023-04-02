@@ -1,0 +1,20 @@
+class Solution{
+public:
+    vector<vector<int>> findMatrix(vector<int> &nums){
+        map<int, int> myMap;
+        for (auto &i : nums) myMap[i]++;
+        vector<vector<int>> myAnsVec;
+        while (!myMap.empty()){
+            vector<int> myVtr;
+            vector<int>tempVect;
+            for (auto i : myMap){
+                myVtr.push_back(i.first);
+                myMap[i.first]--;
+                if (myMap[i.first] == 0) tempVect.push_back(i.first);
+            }
+            myAnsVec.push_back(myVtr);
+            for(auto &i : tempVect) myMap.erase(i);
+        }
+        return myAnsVec;
+    }
+};
