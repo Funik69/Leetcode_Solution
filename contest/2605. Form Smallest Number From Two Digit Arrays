@@ -1,0 +1,33 @@
+class Solution {
+    private:
+    bool chkAns(vector<int>& v, int dt) {
+        for (int i : v) if (i == dt) return true;
+        return false;
+    }
+public:
+    int minNumber(vector<int>& nu1, vector<int>& nu2) {
+        unordered_set<int> set;
+        for (int num : nu1) set.insert(num);
+        for (int num : nu2) set.insert(num);
+        int sm = INT_MAX;
+        for (int num : set) sm = std::min(sm, num);
+        for (int i = sm; i <= 99; i++) {
+            int tmp = i;
+            bool t1 = false, t2 = false;
+            while (tmp > 0) {
+                int res = tmp % 10;
+                if (!t1 && set.count(res) && chkAns(nu1, res)) {
+                    t1 = true;
+                }
+                if (!t2 && set.count(res) && chkAns(nu2, res)) {
+                    t2 = true;
+                }
+                if (t1 && t2) {
+                    return i;
+                }
+                tmp /= 10;
+            }
+        }
+        return -1;
+    }
+};
