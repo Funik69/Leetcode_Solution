@@ -1,0 +1,20 @@
+class Solution {
+public:
+int miceAndCheese(vector<int>& myR1, vector<int>& myR2, int k) {
+        vector<pair<int,pair<int,int>>> vecPair;
+        int n=myR1.size();
+        for(int i=0;i<n;i++)  vecPair.push_back({myR1[i]-myR2[i],{myR1[i],myR2[i]}});
+        int myAnsVal=0;
+        sort(vecPair.begin(), vecPair.end());
+        reverse(vecPair.begin(), vecPair.end());
+        int idxPos=0;
+        for(int i=0;i<n;i++){
+          if(idxPos<k){
+             myAnsVal+=vecPair[i].second.first;
+             idxPos++;
+          }
+          else myAnsVal+=vecPair[i].second.second;
+        }
+         return myAnsVal;
+    }
+};
