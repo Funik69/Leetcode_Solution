@@ -1,0 +1,12 @@
+int minSteps(string str) {
+    auto last=unique(str.begin(),str.end());
+    str.resize(distance(str.begin(),last));
+    int v=0;
+    for(auto i:str){
+        if(i=='a') v++;
+    }
+    int n=str.size();
+    if(v==n-v) return v+1;
+    v=max(v,n-v);
+    return v;
+}
