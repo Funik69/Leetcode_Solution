@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool checkForPrime(int num) {
+    if (num <= 1)  return false;
+    int limit = sqrt(num);
+    for (int i = 2; i <= limit; i++) {
+        if (num % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+    int diagonalPrime(vector<vector<int>>& myArrayvec) {
+    int size = myArrayvec.size();
+    int myAnsval = 0;
+    for (int i = 0; i < size; i++) {
+        if (checkForPrime(myArrayvec[i][i]))  myAnsval = max(myAnsval, myArrayvec[i][i]);
+    }
+    for (int i = 0; i < size; i++) {
+        if (checkForPrime(myArrayvec[i][size - i - 1])) {
+            myAnsval = max(myAnsval, myArrayvec[i][size - i - 1]);
+        }
+    }
+    return myAnsval;
+    }
+};
