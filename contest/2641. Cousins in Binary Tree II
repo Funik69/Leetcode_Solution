@@ -1,0 +1,35 @@
+class Solution {
+public:
+     unordered_map<int,int> myMpp; 
+    void solveItr(TreeNode* node, int dpt){
+        if(node==NULL) return;
+        
+        int tmpp=0;
+        if(node->left!=NULL) tmpp+=node->left->val;
+        if(node->right!=NULL) tmpp+=node->right->val;
+
+        tmpp = myMpp[dpt] - tmpp;
+        if(node->left){
+            node->left->val=tmpp;
+            solveItr(node->left , dpt+1);
+        }
+        
+        if(node->right){
+            node->right->val=tmpp;
+            solveItr(node->right , dpt+1);
+        }
+    }
+    void solveItrsecond(TreeNode* root , int dpt){
+        if(root==NULL) return;
+        myMpp[dpt]+=root->val;
+        solveItrsecond(root->left , dpt+1);
+        solveItrsecond(root->right , dpt +1);
+    }
+   
+    TreeNode* replaceValueInTree(TreeNode* root) {
+        solveItrsecond(root , 0);
+        solveItr(root , 1);
+        root->val=0;
+        return root;
+    }
+};
