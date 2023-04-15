@@ -1,0 +1,16 @@
+class Solution {
+public:
+    vector<long long> findPrefixScore(vector<int>& nums) {
+        //store prefix the aage kro 
+        vector<long long> rest(nums.size(),0);
+        vector<long long> rt(nums.size(),0);
+        int t=0;
+        for(int i=0;i<nums.size();i++){
+            t=max(t,nums[i]);
+            rt[i]=t+nums[i];
+        }
+        rest[0]=rt[0];
+        for(int j=1;j<nums.size();j++) rest[j]=rt[j]+rest[j-1];
+        return rest;
+    }
+};
