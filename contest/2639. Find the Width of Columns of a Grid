@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<int> findColumnWidth(vector<vector<int>>& gg) {
+    int x = gg.size(),y = gg[0].size();
+    vector<int> colmn(y, 0);
+    for (int j = 0; j < y; j++) {
+        
+        int mxW = 0;
+        for (int i = 0; i < x; i++) {
+            int ans=0;
+            if(gg[i][j]>=0){
+                ans=1;
+            }
+            else ans=2;
+            ans += (gg[i][j] == 0) ? 0 : (int)log10(abs(gg[i][j])) + 1;
+            mxW = max(mxW, ans);
+        }
+        
+        if(mxW>1) colmn[j] = mxW-1;
+        else colmn[j]=mxW;
+    }
+        
+    return colmn ;}
+};
