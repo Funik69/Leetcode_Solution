@@ -1,0 +1,50 @@
+class Graph {
+private:
+    vector<vector<pair<int, int>>> list;
+    int n;
+    
+public:
+    
+    Graph(int n, vector<vector<int>>& edges) {
+        //initilize kro kha s kah jana h 
+        this->n = n;
+        list.resize(n);
+        for (vector<int>& ir : edges) {
+            int srcc = ir[0];
+            int dst = ir[1];
+            int cst = ir[2];
+            list[srcc].push_back({dst, cst});
+        }
+    }
+    
+    void addEdge(vector<int> edge) {
+        //list m daal rhe edges
+        int srcc = edge[0];
+        int dst = edge[1];
+        int cst = edge[2];
+        list[srcc].push_back({dst, cst});
+    }
+
+    int shortestPath(int n1, int n2) {
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> myPQ; 
+        vector<int> duri(n, INT_MAX);
+        myPQ.push({0, n1});
+        duri[n1] = 0;
+        while (!myPQ.empty()) {
+            int tmpp = myPQ.top().second;
+            myPQ.pop();
+
+            for (pair<int, int>& j : list[tmpp]) {
+                int cst = j.second; 
+                int k = j.first;
+                
+                if (duri[k] > duri[tmpp] + cst) {
+                    duri[k] = duri[tmpp] + cst;
+                    myPQ.push({duri[k], k});
+                }
+            }
+        }
+        if(duri[n2]==INT_MAX) return -1;
+        return duri[n2];
+    }
+};
