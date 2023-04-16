@@ -1,0 +1,17 @@
+class Solution {
+public:
+    vector<int> rowAndMaximumOnes(vector<vector<int>>& mat) {
+        int res=0,ct=0;
+        for(int i=0;i<mat.size();i++){
+            int mynum=0;
+            for(int j=0;j<mat[0].size();j++){
+                if(mat[i][j]==1) mynum++;
+            }
+            if(mynum>ct){
+                ct=mynum;
+                res=i;
+            }
+        }
+        return {res,ct};
+    }
+};
