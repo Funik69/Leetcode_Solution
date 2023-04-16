@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int addMinimum(string wd) {
+        int myres=0;
+        for(int i=0;i<wd.size();i++){
+            if(wd[i]=='a' && wd[i+1]=='b' && wd[i+2]=='c') i=i+2;
+            else if(wd[i+1]<=wd[i]){
+                myres+=2;
+            }
+            else{
+                i++;
+                myres++;
+            }
+        }
+        return myres;
+    }
+};
