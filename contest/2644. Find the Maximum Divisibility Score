@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int maxDivScore(vector<int>& nums, vector<int>& divid) {
+        sort(divid.begin(),divid.end());
+        int mxx=0,ans=0;
+        for(auto i:divid){
+            int tmp=0;
+            for(auto j:nums){
+                if(j%i==0) tmp++;
+            }
+            if(mxx<tmp){
+                mxx=tmp;
+                ans=i;
+            }
+        }
+        if(mxx==0) return divid[0];
+        return ans;
+    }
+};
