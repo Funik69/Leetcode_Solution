@@ -1,0 +1,20 @@
+class Solution {
+public:
+    string mergeAlternately(string w1, string w2) {
+        string str="";
+        int i=0;
+        while(i<max(w1.size(),w2.size())){
+            if(i<w1.size() && i<w2.size()){
+                str+=w1[i];
+                str+=w2[i];    
+            }
+            if(i>=w1.size()){
+                str+=w2[i];
+            }
+            if(i>=w2.size())
+            str+=w1[i];
+            i++;
+        }
+        return str;
+    }
+};
