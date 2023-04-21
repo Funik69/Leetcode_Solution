@@ -1,0 +1,24 @@
+class Solution{
+public:
+    int prefixSuffixString(vector<string> &s1,vector<string> s2){
+        int ans = 0;
+        unordered_map<string,int> mp;
+        for(auto &itr:s1){
+            for(int i=0;i<itr.size();i++)
+            {
+                if(mp.find(itr.substr(i)) == mp.end())
+                mp[itr.substr(i)] = 1;
+            }
+            for(int i=1;i<itr.size();i++)
+            {
+                if(mp.find(itr.substr(0,i)) == mp.end())
+                mp[itr.substr(0,i)]  = 1;
+            }
+        }
+        for(auto &itr:s2){
+            if(mp.find(itr) != mp.end())
+            ans++;
+        }
+        return ans;
+    }
+};
