@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int dp[101][101][101];
+    int mod = 1e9 + 7;
+    int f(int ind,int minProfit,vector<int>& profit,vector<int>& group,int n,int m){
+        
+        if(n<0) return 0;
+        if(ind==m and minProfit==0) return 1;
+        if(ind==m) return 0;
+
+        if(dp[ind][minProfit][n]!=-1){
+            return dp[ind][minProfit][n];
+        }
+
+        int take=0,notTake=0;
+
+        take=f(ind+1,max(0,minProfit-profit[ind]),profit,group,n-group[ind],m);
+        notTake=f(ind+1,minProfit,profit,group,n,m);
+
+        return dp[ind][minProfit][n] = (take+notTake)%mod;
+
+    }
+    int profitableSchemes(int n, int minProfit, vector<int>& group, vector<int>& profit) {
+        int m=group.size();
+        memset(dp, -1, sizeof(dp));
+        return f(0,minProfit,profit,group,n,m);
+
+    }
+};
