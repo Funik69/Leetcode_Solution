@@ -1,0 +1,27 @@
+class Solution {
+public:
+    const static int N = 1e5+10,mod = 1e9+7;
+    int dfs(string &s,int n,int i,int k,vector<int> &dp){
+        if(i>=n) return 1;
+        if(s[i]=='0') return 0; 
+        if(dp[i]!=-1) return dp[i];
+        int ans = 0;
+        int tmp = 0;
+        for(int j=i;j<n;j++){
+            string tmp = s.substr(i,j-i+1);
+            int val = (tmp.size()<=9)? stoi(tmp) : 0; 
+            if(tmp.size()<=9 and tmp[0]!='0' and (val>=1 and val<=k)){
+                ans += dfs(s,n,j+1,k,dp);
+                ans %= mod;
+            }
+            else break; 
+        }
+        return dp[i] = ans;
+    }
+    int numberOfArrays(string s, int k){
+        int n = s.size();
+        vector<int> dp(n,-1);
+        int ans = dfs(s,n,0,k,dp);
+        return ans;
+    }
+};
