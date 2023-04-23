@@ -1,0 +1,10 @@
+class Solution{
+public:
+    int minimumNumber(int n,vector<int> &arr){
+       int res=0;
+       for(auto i:arr){
+           res=__gcd(res,i);
+       }
+       return res ;
+    }
+};
