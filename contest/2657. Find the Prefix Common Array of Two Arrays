@@ -1,0 +1,18 @@
+class Solution {
+public:
+    vector<int> findThePrefixCommonArray(vector<int>& A, vector<int>& B) {
+        vector<int> v1,v2,v(A.size());
+        int cnt=0;
+        for(int i=0;i<A.size();i++){
+            v1.push_back(A[i]);
+            v2.push_back(B[i]);
+            if(A[i]==B[i]) cnt++;
+            else{
+                if(count(v1.begin(),v1.end(),B[i])) cnt++;
+                if(count(v2.begin(),v2.end(),A[i])) cnt++;
+            }
+            v[i]=cnt;
+        }
+        return v;
+    }
+};
