@@ -1,0 +1,30 @@
+class Solution {
+    int cursum=0,ans=0;
+public:
+    bool valid(int i,int j,vector<vector<int>> grid){
+        if(i>=0 && i<grid.size() && j>=0 && j<grid[0].size() && grid[i][j]!=0) return true;
+        return false;
+    }
+    void dfs(int i,int j,vector<vector<int>>& v,int m,int n){
+        cursum+=v[i][j];
+        v[i][j]=0;
+         if(valid(i+1,j,v)) dfs(i+1,j,v,m,n);
+         if(valid(i-1,j,v)) dfs(i-1,j,v,m,n);
+         if(valid(i,j+1,v)) dfs(i,j+1,v,m,n);
+         if(valid(i,j-1,v)) dfs(i,j-1,v,m,n);
+    }
+    int findMaxFish(vector<vector<int>>& grid) {
+        int m=grid.size();
+        int n=grid[0].size();
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(grid[i][j]!=0){
+                    dfs(i,j,grid,m,n);
+                    ans=max(ans,cursum); 
+                    cursum=0;
+                }
+            }
+        }
+        return ans;
+    }
+};
