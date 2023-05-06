@@ -1,0 +1,13 @@
+class Solution {
+public:
+    char nextGreatestLetter(vector<char>& let, char tar) {
+        int i=0,j=let.size()-1;
+        if(let[j]-'0' <= tar-'0') return let[0];
+        while(i<=j){
+            int mid=(i+j)/2;
+            if(let[mid]-'0'> tar-'0') j=mid-1;
+            else i=mid+1;
+        }
+        return let[i];
+    }
+};
