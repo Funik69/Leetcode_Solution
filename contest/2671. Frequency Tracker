@@ -1,0 +1,35 @@
+class FrequencyTracker {
+public:
+    unordered_map<int,int> omp,cmp;
+    FrequencyTracker() {
+        
+    }
+    
+    void add(int num) {
+        if(cmp[omp[num]]>0){
+            cmp[omp[num]]--;
+        }
+        omp[num]++;
+        cmp[omp[num]]++;
+    }
+    
+    void deleteOne(int num) {
+     if(omp[num]>0){
+         cmp[omp[num]]--;
+         omp[num]--;
+         cmp[omp[num]]++;
+     }
+    }
+    
+    bool hasFrequency(int frq) {
+      return cmp[frq]>0;
+    }
+};
+
+/**
+ * Your FrequencyTracker object will be instantiated and called as such:
+ * FrequencyTracker* obj = new FrequencyTracker();
+ * obj->add(number);
+ * obj->deleteOne(number);
+ * bool param_3 = obj->hasFrequency(frequency);
+ */
