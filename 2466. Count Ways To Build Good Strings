@@ -1,0 +1,20 @@
+#define ll long long 
+class Solution {
+public:
+ll mod=1e9+7;
+ll solve(ll len,ll low,ll high,int zero,int one,vector<ll>& dp){
+    if(len>high) return 0;
+    if(dp[len]!=-1) return dp[len];
+    ll ans=0;
+    if(len>=low && len<=high) ans=1;
+    ans+=solve(len+zero,low,high,zero,one,dp)%mod;
+    ans=(ans%mod+solve(len+one,low,high,zero,one,dp)%mod)%mod;
+    dp[len]=ans;
+    return ans;
+
+}
+    int countGoodStrings(int low, int high, int zero, int one) {
+        vector<ll> dp(high+1,-1);
+        return solve(0,low,high,zero,one,dp);
+    }
+};
