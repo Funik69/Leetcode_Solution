@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int maxMoves(vector<vector<int>>& grid) {
+        vector<int>diree{-1,0,1};
+        int m=grid.size();
+        int n=grid[0].size();
+        vector<vector<int>>tmp(m,vector<int>(n,0));
+        for(int j=n-2;j>=0;j--){
+            for(int i=0;i<m;i++){
+                for(auto k:diree){
+                    if(k+i>=0 && k+i<m){
+                        if(grid[i][j]<grid[i+k][j+1])
+                        tmp[i][j]=max(tmp[i][j],1+tmp[i+k][j+1]);
+                    }
+                }
+            }
+        }   
+        
+        int trkk=0;
+        for(int i=0;i<m;i++) trkk=max(trkk,tmp[i][0]); return trkk;
+    }
+};
