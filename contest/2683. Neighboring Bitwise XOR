@@ -1,0 +1,8 @@
+class Solution {
+public:
+    bool doesValidArrayExist(vector<int>& der) {
+        int x=0;
+        for(auto itr:der) x^=itr;
+        return (x==0);
+    }
+};
