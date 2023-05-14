@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<int> circularGameLosers(int n, int k) {
+        map<int,int> mp;
+        int task=0,i=0,j=1;
+        mp[0]++;
+        while(true){
+            task=(i+k*j)%n;
+            j++;
+            i=task;
+            if(mp[i]==1) break;
+            mp[i]++; }
+            int ans=0;
+            for(int i=0;i<n;i++){
+                if(mp[i]==0) ans++;
+            }
+            vector<int> v(ans);
+            int tmp=0;
+            for(int i=0;i<n;i++){
+                if(mp[i]==0) {
+                    v[tmp]=i+1;
+                    tmp++;
+                }
+            }
+            return v;
+    }
+};
