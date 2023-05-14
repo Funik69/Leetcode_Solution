@@ -1,0 +1,19 @@
+class Solution {
+public:
+    const int modd = 1e9 + 7;
+    int sumOfPower(vector<int>& a) {
+        vector<long long > arrVec;
+        for(auto i:a){
+            arrVec.push_back(i);
+        }
+        sort(arrVec.begin(),arrVec.end());
+        long long miVal=0,Tot=0;
+        for(int i=0;i<arrVec.size();i++){
+            Tot=(Tot+((arrVec[i]*arrVec[i])%modd)*arrVec[i]%modd)%modd;
+            Tot=(Tot+((miVal*arrVec[i])%modd)*arrVec[i]%modd)%modd;
+            miVal=(miVal*2)%modd;
+            miVal=(miVal+arrVec[i])%modd;
+        }
+        return Tot%modd;
+    }
+};
