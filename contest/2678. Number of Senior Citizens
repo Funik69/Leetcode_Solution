@@ -1,0 +1,11 @@
+class Solution {
+public:
+    int countSeniors(vector<string>& d) {
+       int trackk = 0;
+        for (auto i : d) {
+            int Prage = stoi(i.substr(11, 2));
+            if (Prage>60) trackk++;
+        }
+        return trackk;
+    }
+};
