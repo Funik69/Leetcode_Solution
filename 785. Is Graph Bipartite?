@@ -1,0 +1,28 @@
+class Solution {
+public:
+bool soll(int idx,vector<vector<int>>& graph,vector<int> &col){
+    queue<int> q;
+    q.push(idx);
+    while(!q.empty()){
+        int node=q.front();
+        q.pop();
+        for(auto i:graph[node]){
+            if(col[i]==-1){
+                col[i]=!col[node];
+                if(soll(i,graph,col)==false) return false;
+            }
+            else if(col[i]==col[node]) return false;
+        } 
+    } return true;
+}
+    bool isBipartite(vector<vector<int>>& graph) {
+        int n=graph.size();
+        vector<int> col(n,-1);
+        for(int i=0;i<n;i++){
+            if(col[i]==-1){
+                if(soll(i,graph,col)==false) return false;
+            }
+        }
+        return true;
+    }
+};
