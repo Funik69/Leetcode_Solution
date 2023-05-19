@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int kthFactor(int n, int k) {
+        set<int> st;
+        for(int i=1;i<=n;i++){
+            if(n%i==0) st.insert(i);
+        }
+        if(st.size()<k) return -1;
+        auto it=st.begin();
+        advance(it,k-1);
+        return *it;
+    }
+};
