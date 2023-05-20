@@ -1,0 +1,34 @@
+class Solution {
+public:
+void dfs(string a ,string b ,unordered_map<string,vector<pair<string,double>>> mp,unordered_map<string,bool> vis,double temp, double &ans){
+    if(vis[a]) return ; 
+    if(a==b){
+    ans=temp; 
+    return; }
+    vis[a] = true; 
+    for(auto i:mp[a]){
+        dfs(i.first,b,mp,vis,temp*i.second,ans);
+    }
+}
+    vector<double> calcEquation(vector<vector<string>>& equ, vector<double>& val, vector<vector<string>>& qu){     
+        unordered_map<string,vector<pair<string,double>>> mp; 
+        vector<double> res ; 
+        for(int i = 0; i<equ.size();i++){
+            mp[equ[i][0]].push_back({equ[i][1],val[i]});
+            mp[equ[i][1]].push_back({equ[i][0],1.0/val[i]});
+        }
+        for(int i =  0 ; i<qu.size();i++){
+            unordered_map<string,bool> vis;
+            string a = qu[i][0];
+            string b = qu[i][1];
+            if(mp.find(a)==mp.end()){
+                res.push_back(-1);
+                continue ; 
+            }
+            double ans = -1 , temp =1; 
+            dfs(a,b,mp,vis,temp,ans);
+            res.push_back(ans);
+        }
+         return res;
+    }
+};
