@@ -1,0 +1,39 @@
+class Solution {
+private:
+    int timer = 1;
+
+public:
+    void dfs(int node, int par, vector<int>& vis, vector<vector<int>>& adj, vector<int>& tin, vector<int>& low, vector<vector<int>>& ans) {
+        vis[node] = 1;
+        tin[node] = low[node] = timer;
+        timer++;
+        for (auto& i : adj[node]) {
+            if (i == par) { continue; }
+            if (!vis[i]) {
+                dfs(i, node, vis, adj, tin, low, ans);
+                low[node] = min(low[node], low[i]);
+                if (low[i] > tin[node]) {
+                    ans.push_back({i, node});
+                }
+            } else {
+                low[node] = min(low[node], low[i]);
+            }
+        }
+    }
+
+    vector<vector<int>> criticalConnections(int n, vector<vector<int>>& con) {
+        vector<vector<int>> adj(n);
+        vector<int> vis(n, 0);
+        vector<int> tin(n), low(n);
+        vector<vector<int>> ans;
+
+        for (auto& i : con) {
+            adj[i[0]].push_back(i[1]);
+            adj[i[1]].push_back(i[0]);
+        }
+        dfs(0, -1, vis, adj, tin, low, ans);
+        return ans;
+    }
+};
+
+
