@@ -1,0 +1,15 @@
+class Solution {
+public:
+    bool repeatedSubstringPattern(string s) {
+        string str="";
+        for(auto i:s){
+            str+=i;
+            string tmp="";
+            for(int j=0;j<s.size()/str.size();j++){
+                tmp+=str;
+            }
+            if(tmp.size()==s.size() && tmp==s && str.size()!=s.size()) return true;
+        }
+return false;
+    }
+};
