@@ -1,0 +1,14 @@
+/**
+ * @param {Array} arr
+ * @param {number} size
+ * @return {Array[]}
+ */
+var chunk = function(arr, size) {
+    var vec=[];
+    var idx=0;
+    while(idx < arr.length){
+        vec.push(arr.slice(idx,idx+size));
+        idx+=size;
+    }
+    return vec;
+};
