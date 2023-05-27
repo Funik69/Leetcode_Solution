@@ -1,0 +1,30 @@
+class Solution{
+    public:
+    struct Node* modifyTheList(struct Node *head)
+    {
+       vector<int> v;
+       Node* root=head;
+       while(root!=NULL){
+           v.push_back(root->data);
+           root=root->next;
+       }
+       int n=v.size()/2;
+       Node* a=new Node(-1);
+       Node* b=a;
+       for(int i=0;i<n;i++){
+           int idx=(v.size()-i-1);
+           int vl=v[idx]-v[i];
+           b->next=new Node(vl);
+           b=b->next;
+       }
+       if(v.size()%2==1){
+           b->next=new Node(v[n]);
+           b=b->next;
+       }
+       for(int i=n-1;i>=0;i--){
+           b->next=new Node(v[i]);
+           b=b->next;
+       }
+       return a->next;
+    }
+};
