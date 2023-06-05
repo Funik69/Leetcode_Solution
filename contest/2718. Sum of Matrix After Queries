@@ -1,0 +1,21 @@
+class Solution {
+public:
+    long long matrixSumQueries(int n, vector<vector<int>>& q) {
+        vector<bool> rflag(n,1),cflag(n,1);
+        long long res=0,Rcnt=n,Ccnt=n;
+        for(int i=q.size()-1;i>=0;i--){
+            if(q[i][0]==0 && rflag[q[i][1]]){
+                res+=Ccnt*q[i][2];
+                rflag[q[i][1]]=0;
+                Rcnt--;
+            } 
+            else if(q[i][0]==1 && cflag[q[i][1]]){
+                res+=Rcnt*q[i][2];
+                cflag[q[i][1]]=0;
+                Ccnt--;
+            } 
+            else {}
+        }
+        return res;
+    }
+};
