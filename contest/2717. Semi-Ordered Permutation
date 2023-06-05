@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int semiOrderedPermutation(vector<int>& nums) {
+        int i=-1,j=-1;
+        for(int k=0;k<nums.size();k++){
+            if(nums[k]==1) i=k;
+            else if(nums[k]==nums.size()) j=k;
+        }
+        int ans=i+(nums.size()-1-j);
+        if(i>j) ans-=1;
+        return ans;
+    }
+};
