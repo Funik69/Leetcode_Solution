@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int longestSemiRepetitiveSubstring(string s) {
+        int i=0,j=1;
+        int idx=0,cnt=0;
+        int ans=1;
+        while(j<s.size()){
+            if(s[j]!=s[j-1]){
+                j++;
+            }
+            else if(cnt==0 && s[j]==s[j-1]){
+                idx=j;
+                cnt++;
+                j++;
+            }
+            else{
+                cnt=1;
+                ans=max(ans,(j-i));
+                i=idx;
+                idx=j;
+                j++;
+            }
+            ans=max(ans,j-i);
+        }
+        return ans;
+    }
+};
