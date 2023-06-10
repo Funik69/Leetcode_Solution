@@ -1,0 +1,20 @@
+class Solution {
+    long long soll(int m, int n) {
+        int num = min(m, n);
+        return (m - num + 1 + m) * static_cast<long long>(num) / 2 + n - num;  
+    }
+public:
+    int maxValue(int n, int index, int maxSum) {
+        int left = 1, right = maxSum;
+        while (left <= right) {
+            int mid = (left + right)/2;
+            if (soll(mid, index + 1) + soll(mid, n - index) - mid <= maxSum) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left - 1;
+        
+    }
+};
