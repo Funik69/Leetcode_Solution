@@ -1,0 +1,16 @@
+class Solution {
+public:
+    string smallestString(string s) {
+        int i=0,j=s.size();
+        //cbabc baabc
+        while(i<j && s[i]=='a') i++;
+        if(i==j){
+            s[j-1]='z' ; return s;
+        }
+        while(i<j && s[i]!='a'){
+            s[i]-=1;
+            i++;
+        }
+        return s;
+    }
+};
