@@ -1,0 +1,28 @@
+class Solution {
+public: 
+    int dp[1001][1001];
+    string longestPalindrome(string A) {
+        string B = string(A.rbegin(), A.rend());
+        int n = A.size();
+        memset(dp, 0, sizeof(dp));
+        int len = 0;
+        string res = "";
+        
+        for(int i = 1; i <= n; i++){
+            for(int j = 1; j <= n; j++){
+                if(A[i-1] == B[j-1]){
+                    dp[i][j] = 1 + dp[i-1][j-1];
+                    if(len < dp[i][j]){
+                        string tmp1 = A.substr(i-dp[i][j], dp[i][j]);
+                        string tmp2 = string(tmp1.rbegin(), tmp1.rend());
+                        if(tmp1 == tmp2){
+                            len = dp[i][j];
+                            res = tmp1;
+                        }
+                    }
+                }
+            }
+        }  
+        return res;
+    }
+};
