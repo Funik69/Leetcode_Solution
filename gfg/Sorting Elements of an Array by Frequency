@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+ {
+	int t;
+	cin>>t;
+	while(t--){
+	    int n; cin>>n;
+	    int a[n];
+	    map<int,int> mp;
+	    for(int i=0;i<n;i++){
+	        cin>>a[i];
+	        mp[a[i]]++;
+	    }
+	    vector<pair<int,int>> vp;
+	    for(auto i:mp){
+	        vp.push_back({i.first,i.second});
+	    }
+	     sort(vp.begin(), vp.end(), [](const pair<int, int> &a, const pair<int, int> &b) {
+            if(a.second == b.second) return a.first < b.first;
+            return a.second > b.second;
+        });
+        for(auto i:vp){
+            for(int k=0;k<i.second;k++)
+            cout<<i.first<<" ";
+        }
+        cout<<endl;
+	}
+	return 0;
+}
