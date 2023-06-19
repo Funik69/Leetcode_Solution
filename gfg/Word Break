@@ -1,0 +1,29 @@
+class Solution {
+public:
+bool dfs(int i,int j,string &word,vector<vector<char>>& b,int idx){
+    if(idx==word.size()) return true;
+    if(i<0 || j<0 || i>=b.size() || j>=b[0].size() ||b[i][j]!=word[idx]){
+        return false;
+    }
+    
+    char ch=b[i][j];
+    b[i][j]='@';
+    bool a=dfs(i,j+1,word,b,idx+1);
+    bool bi=dfs(i,j-1,word,b,idx+1);
+    bool c=dfs(i+1,j,word,b,idx+1);
+    bool d=dfs(i-1,j,word,b,idx+1);
+  b[i][j]=ch;
+  return  (a|| bi|| c|| d);
+  
+}
+    bool isWordExist(vector<vector<char>>& board, string word) {
+        for(int i=0;i<board.size();i++){
+            for(int j=0;j<board[0].size();j++){
+                if(board[i][j]==word[0] &&dfs(i,j,word,board,0))
+                return true;
+                
+            }
+        }
+        return false;
+    }
+};
