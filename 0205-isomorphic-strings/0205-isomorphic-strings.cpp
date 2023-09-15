@@ -10,14 +10,7 @@ public:
             m[t[i]]=s[i];
             else if(m[t[i]]!=s[i]) return 0;
         }
-        for(int i=0;i<t.size();i++){
-            s[i]=mp[s[i]];
-        }
-        if(s==t) return 1;
-         for(int i=0;i<t.size();i++){
-            t[i]=m[t[i]];
-        }
-        return s==t;
+        return 1;
 
     }
 };
